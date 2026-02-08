@@ -1,0 +1,2658 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+							<style>
+								body {
+									background-color: white; /* Ensure the iframe has a white background */
+								}
+
+								
+							</style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mermaid Maritime - Cost Management Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --primary: #0c2340;
+            --primary-light: #1a4d7a;
+            --accent: #00d4ff;
+            --accent-dark: #0099cc;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-light: #f9fafb;
+            --border: #e5e7eb;
+            --white: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        /* Hide all pages by default */
+        .page-container {
+            display: none;
+        }
+        .page-container.active {
+            display: block;
+        }
+        /* ========================================
+           HOME PAGE STYLES
+        ======================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(12, 35, 64, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .navbar.scrolled {
+            padding: 10px 0;
+            background: rgba(12, 35, 64, 1);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .nav-logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav-logo-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: white;
+        }
+        .nav-logo-text {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+        .nav-menu a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 8px 0;
+            position: relative;
+        }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        .nav-menu a:hover {
+            color: var(--accent);
+        }
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        .btn {
+            padding: 10px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--accent);
+        }
+        .btn-outline:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+        }
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, #2d5f8d 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='rgba(255,255,255,0.1)'/%3E%3C/svg%3E") repeat-x;
+            animation: wave 15s linear infinite;
+        }
+        @keyframes wave {
+            0% { background-position-x: 0; }
+            100% { background-position-x: 1200px; }
+        }
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+        .hero-content h1 {
+            color: white;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        .hero-content .highlight {
+            color: var(--accent);
+        }
+        .hero-content p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        .btn-large {
+            padding: 15px 35px;
+            font-size: 1.1rem;
+        }
+        .hero-image {
+            position: relative;
+            animation: fadeInRight 1s ease-out;
+        }
+        .hero-mockup {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border: 5px solid rgba(255, 255, 255, 0.1);
+        }
+        .floating-card {
+            position: absolute;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+        .floating-card.card-1 {
+            top: 10%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+        .floating-card.card-2 {
+            bottom: 10%;
+            right: -10%;
+            animation-delay: 1.5s;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        /* Features Section */
+        .features {
+            padding: 100px 20px;
+            background: var(--bg-light);
+        }
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+        .section-header .subtitle {
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent);
+        }
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .feature-icon svg {
+            width: 35px;
+            height: 35px;
+            fill: white;
+        }
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        /* ========================================
+           LOGIN PAGE
+        ======================================== */
+        .auth-page {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, #2d5f8d 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .wave {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='rgba(255,255,255,0.05)'/%3E%3C/svg%3E") repeat-x;
+            animation: wave 15s linear infinite;
+            opacity: 0.3;
+        }
+        .auth-container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 450px;
+        }
+        .auth-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent) 0%, #0099cc 100%);
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .logo svg {
+            width: 50px;
+            height: 50px;
+            fill: white;
+        }
+        .logo-section h1 {
+            color: var(--text-primary);
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        .logo-section p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .input-wrapper {
+            position: relative;
+        }
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+        .input-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+        .password-toggle:hover {
+            color: var(--text-primary);
+        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .checkbox-group label {
+            margin: 0;
+            font-weight: 400;
+            cursor: pointer;
+        }
+        .text-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .text-link:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+        .text-center {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 25px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid var(--border);
+        }
+        .divider span {
+            padding: 0 15px;
+        }
+        .sso-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .btn-sso {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .btn-sso:hover {
+            border-color: var(--accent);
+            background: rgba(0, 212, 255, 0.05);
+        }
+        .btn-sso svg {
+            width: 24px;
+            height: 24px;
+        }
+        /* ========================================
+           MODULE SELECTION PAGE
+        ======================================== */
+        .module-selection-page {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, #2d5f8d 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+        .module-container {
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+            z-index: 10;
+        }
+        .module-header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .module-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent) 0%, #0099cc 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        .module-logo svg {
+            width: 50px;
+            height: 50px;
+            fill: white;
+        }
+        .module-header h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        .module-header p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .module-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        .module-card:nth-child(1) { animation-delay: 0.1s; }
+        .module-card:nth-child(2) { animation-delay: 0.2s; }
+        .module-card:nth-child(3) { animation-delay: 0.3s; }
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--card-color-1), var(--card-color-2));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .module-card:hover::before {
+            transform: scaleX(1);
+        }
+        .module-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .module-card.cfo {
+            --card-color-1: #6366f1;
+            --card-color-2: #8b5cf6;
+        }
+        .module-card.pm {
+            --card-color-1: #10b981;
+            --card-color-2: #059669;
+        }
+        .module-card.admin {
+            --card-color-1: #f59e0b;
+            --card-color-2: #d97706;
+        }
+        .module-icon-box {
+            width: 80px;
+            height: 80px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease;
+        }
+        .module-card:hover .module-icon-box {
+            transform: rotate(5deg) scale(1.1);
+        }
+        .module-card.cfo .module-icon-box {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        }
+        .module-card.pm .module-icon-box {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        .module-card.admin .module-icon-box {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        .module-icon-box svg {
+            width: 45px;
+            height: 45px;
+            fill: white;
+        }
+        .module-card h2 {
+            color: var(--text-primary);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .module-card h3 {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+        .module-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .module-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        .module-features li {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        .module-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--card-color-1);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .access-button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .module-card.cfo .access-button {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        }
+        .module-card.pm .access-button {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        .module-card.admin .access-button {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        .access-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        .access-button::after {
+            content: '→';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            transition: right 0.3s ease;
+        }
+        .access-button:hover::after {
+            right: 20px;
+        }
+        .user-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            animation: fadeInUp 1s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .user-info-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent) 0%, #0099cc 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .user-details h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        .user-details p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        .logout-button {
+            padding: 10px 25px;
+            background: rgba(239, 68, 68, 0.8);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .logout-button:hover {
+            background: rgba(220, 38, 38, 1);
+            transform: scale(1.05);
+        }
+        /* ========================================
+           PROJECT COST REPORT PAGE STYLES
+        ======================================== */
+        .project-cost-page {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        /* TOP NAVIGATION & HEADER */
+        .top-nav {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 18px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .top-nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        .pc-nav-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .back-button {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateX(-3px);
+        }
+        .page-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .page-title-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        .nav-actions {
+            display: flex;
+            gap: 12px;
+        }
+        /* MAIN CONTAINER */
+        .main-container {
+            max-width: 1600px;
+            margin: 30px auto;
+            padding: 0 30px;
+        }
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 25px 35px;
+            margin-bottom: 25px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .welcome-banner::before {
+            content: '👋';
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 5rem;
+            opacity: 0.2;
+        }
+        .welcome-content h2 {
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+        .welcome-content p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        .quick-stats {
+            display: flex;
+            gap: 0;
+        }
+        .quick-stat-item {
+            text-align: center;
+            padding: 0 30px;
+        }
+        .quick-stat-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+        }
+        .quick-stat-label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        /* SUMMARY SECTION */
+        .summary-section {
+            background: white;
+            border-radius: 20px;
+            padding: 25px 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        .summary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .summary-header h2 {
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+        }
+        .section-icon {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--accent) 0%, #00b8e6 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+        .filter-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .date-filter {
+            padding: 8px 16px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .date-filter:hover {
+            border-color: var(--accent);
+            box-shadow: 0 2px 10px rgba(0, 212, 255, 0.1);
+        }
+        /* Summary Grid */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+        .summary-area {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .area-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .health-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .financial-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .summary-card {
+            padding: 20px 18px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        .summary-card.cpi-safe {
+            background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+            border-color: #81c784;
+        }
+        .summary-card.cpi-watch {
+            background: linear-gradient(135deg, #ffe8a3 0%, #ffd966 100%);
+            border-color: #ffca28;
+        }
+        .summary-card.cpi-alert {
+            background: linear-gradient(135deg, #ffcdd2 0%, #ef9a9a 100%);
+            border-color: #e57373;
+        }
+        .summary-card.financial {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            border-color: #bdbdbd;
+        }
+        .card-icon {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .card-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: rgba(0, 0, 0, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .card-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: rgba(0, 0, 0, 0.85);
+            line-height: 1;
+        }
+        .card-subtitle {
+            font-size: 0.7rem;
+            color: rgba(0, 0, 0, 0.6);
+            margin-top: 4px;
+        }
+        /* PROJECTS LIST SECTION */
+        .projects-section {
+            background: white;
+            border-radius: 20px;
+            padding: 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+        .pc-section-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .pc-section-header h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .projects-count-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            backdrop-filter: blur(10px);
+        }
+        .search-filter {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .search-box {
+            position: relative;
+        }
+        .search-box input {
+            padding: 10px 15px 10px 40px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            width: 280px;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.95);
+            transition: all 0.3s ease;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: white;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
+        }
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+        .filter-dropdown {
+            padding: 10px 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        /* Projects Table */
+        .projects-list-container {
+            padding: 20px;
+        }
+        .projects-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            table-layout: fixed;
+            font-size: 0.7rem;
+        }
+        .projects-table thead {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+        }
+        .projects-table th {
+            padding: 10px 4px;
+            text-align: left;
+            font-weight: 700;
+            color: var(--text-primary);
+            border-bottom: 3px solid var(--primary);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            line-height: 1.2;
+            vertical-align: middle;
+        }
+        .projects-table td {
+            padding: 12px 4px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.7rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .projects-table tfoot {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-top: 3px solid var(--warning);
+        }
+        .projects-table tfoot td {
+            padding: 14px 4px;
+            font-weight: 800;
+            font-size: 0.75rem;
+            color: var(--primary);
+            border-bottom: none;
+        }
+        .summary-label {
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--primary);
+        }
+        .summary-icon {
+            font-size: 1.2rem;
+        }
+        .projects-table th:nth-child(1), .projects-table td:nth-child(1) { width: 5%; }
+        .projects-table th:nth-child(2), .projects-table td:nth-child(2) { width: 9%; }
+        .projects-table th:nth-child(3), .projects-table td:nth-child(3) { width: 5%; }
+        .projects-table th:nth-child(4), .projects-table td:nth-child(4) { width: 5%; }
+        .projects-table th:nth-child(5), .projects-table td:nth-child(5) { width: 5%; }
+        .projects-table th:nth-child(6), .projects-table td:nth-child(6) { width: 5%; }
+        .projects-table th:nth-child(7), .projects-table td:nth-child(7) { width: 4%; text-align: center; }
+        .projects-table th:nth-child(8), .projects-table td:nth-child(8) { width: 5%; }
+        .projects-table th:nth-child(9), .projects-table td:nth-child(9) { width: 5%; }
+        .projects-table th:nth-child(10), .projects-table td:nth-child(10) { width: 4%; text-align: center; }
+        .projects-table th:nth-child(11), .projects-table td:nth-child(11) { width: 5%; }
+        .projects-table th:nth-child(12), .projects-table td:nth-child(12) { width: 5%; }
+        .projects-table th:nth-child(13), .projects-table td:nth-child(13) { width: 4%; text-align: center; }
+        .projects-table th:nth-child(14), .projects-table td:nth-child(14) { width: 5%; }
+        .projects-table th:nth-child(15), .projects-table td:nth-child(15) { width: 5%; text-align: center; }
+        .projects-table th:nth-child(16), .projects-table td:nth-child(16) { width: 4%; text-align: center; }
+        .projects-table th:nth-child(17), .projects-table td:nth-child(17) { width: 8%; text-align: center; }
+        .projects-table tbody tr {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .projects-table tbody tr:hover {
+            background: linear-gradient(90deg, rgba(0, 212, 255, 0.05) 0%, rgba(0, 212, 255, 0.02) 100%);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .project-no {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .project-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .amount {
+            font-weight: 600;
+            text-align: right;
+        }
+        .amount.positive {
+            color: var(--success);
+        }
+        .amount.negative {
+            color: var(--danger);
+        }
+        .percent-cell {
+            text-align: center;
+            font-weight: 600;
+        }
+        .cpi-cell {
+            text-align: center;
+            font-weight: 700;
+            padding: 4px 2px;
+            border-radius: 4px;
+        }
+        .cpi-good {
+            color: #00c853;
+            background: rgba(0, 200, 83, 0.1);
+        }
+        .cpi-warning {
+            color: #ff9800;
+            background: rgba(255, 152, 0, 0.1);
+        }
+        .cpi-danger {
+            color: #f44336;
+            background: rgba(244, 67, 54, 0.1);
+        }
+        .health-status {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .health-green {
+            background: linear-gradient(135deg, #00e676 0%, #00c853 100%);
+            color: white;
+        }
+        .health-yellow {
+            background: linear-gradient(135deg, #ffeb3b 0%, #ffc107 100%);
+            color: #424242;
+        }
+        .health-red {
+            background: linear-gradient(135deg, #ff5252 0%, #f44336 100%);
+            color: white;
+        }
+        .health-icon {
+            font-size: 0.75rem;
+        }
+        /* PROJECT DETAIL MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .modal-container {
+            background: white;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-header h2 {
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .modal-title-icon {
+            width: 35px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .close-modal {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+        .modal-body {
+            padding: 40px 30px;
+            overflow-y: auto;
+            background: linear-gradient(135deg, #fafbfc 0%, #f5f7fa 100%);
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .menu-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--accent) 0%, #00b8e6 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        .menu-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        .menu-card:hover::before {
+            transform: scaleX(1);
+        }
+        .menu-card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+            filter: grayscale(0.3);
+            transition: all 0.3s ease;
+        }
+        .menu-card:hover .menu-card-icon {
+            filter: grayscale(0);
+            transform: scale(1.1);
+        }
+        .menu-card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        .menu-card-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+        /* Spinner */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            display: inline-block;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        /* Scroll to Top */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent) 0%, #00b8e6 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+            transition: all 0.3s ease;
+            z-index: 999;
+            font-size: 1.3rem;
+        }
+        .scroll-top.show {
+            display: flex;
+        }
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.5);
+        }
+        /* ========================================
+           RESPONSIVE DESIGN
+        ======================================== */
+        @media (max-width: 1200px) {
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+            .menu-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 1024px) {
+            .welcome-banner {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+        }
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+            .nav-menu {
+                display: none;
+            }
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .hero-image {
+                order: -1;
+            }
+            .floating-card {
+                display: none;
+            }
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+            .pc-nav-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .search-filter {
+                flex-direction: column;
+                width: 100%;
+            }
+            .search-box input {
+                width: 100%;
+            }
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            .projects-table thead {
+                display: none;
+            }
+            .projects-table,
+            .projects-table tbody,
+            .projects-table tr,
+            .projects-table td {
+                display: block;
+            }
+            .projects-table tr {
+                margin-bottom: 20px;
+                border: 2px solid var(--border);
+                border-radius: 12px;
+                padding: 16px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            }
+            .projects-table td {
+                text-align: left;
+                padding: 8px 0;
+                border: none;
+                display: flex;
+                justify-content: space-between;
+            }
+            .projects-table td::before {
+                content: attr(data-label);
+                font-weight: 700;
+                color: var(--text-secondary);
+            }
+        }
+        @media (max-width: 480px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========================================
+         1. HOME PAGE
+    ======================================== -->
+    <div class="page-container active" id="homePage">
+        <nav class="navbar" id="navbar">
+            <div class="nav-container">
+                <a href="#" class="nav-logo">
+                    <div class="nav-logo-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2L4.5 7.5v9l7.5 5.5 7.5-5.5v-9L12 2zm0 2.18l5.5 3.82v6l-5.5 4-5.5-4v-6l5.5-3.82z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </div>
+                    <span class="nav-logo-text">Mermaid Maritime</span>
+                </a>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#modules">Modules</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="nav-buttons">
+                    <button class="btn btn-outline" onclick="showPage('loginPage')">Login</button>
+                    <button class="btn btn-primary" onclick="requestDemo()">Request Demo</button>
+                </div>
+                <button class="mobile-menu-toggle">☰</button>
+            </div>
+        </nav>
+        <section class="hero" id="home">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>
+                        Simplify Your <span class="highlight">Marine Operations</span> Cost Management
+                    </h1>
+                    <p>
+                        Transform your maritime cost control with real-time insights,
+                        automated workflows, and comprehensive project tracking.
+                        Built specifically for the marine industry.
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary btn-large" onclick="showPage('loginPage')">
+                            <span>Get Started</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                                <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+                            </svg>
+                        </button>
+                        <button class="btn btn-outline btn-large">
+                            <span>Learn More</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <svg viewBox="0 0 800 600" class="hero-mockup">
+                        <rect width="800" height="600" rx="20" fill="#f9fafb"/>
+                        <rect width="800" height="80" rx="20" fill="#0c2340"/>
+                        <circle cx="40" cy="40" r="8" fill="#00d4ff"/>
+                        <rect x="70" y="30" width="100" height="20" rx="5" fill="rgba(255,255,255,0.3)"/>
+                        <rect x="40" y="120" width="220" height="140" rx="10" fill="white" stroke="#e5e7eb" stroke-width="2"/>
+                        <rect x="50" y="135" width="80" height="30" rx="5" fill="#dbeafe"/>
+                        <text x="90" y="156" text-anchor="middle" fill="#1f2937" font-size="14" font-weight="bold">Budget</text>
+                        <text x="150" y="200" text-anchor="middle" fill="#0c2340" font-size="32" font-weight="bold">$5.2M</text>
+                        <rect x="50" y="230" width="160" height="8" rx="4" fill="#e5e7eb"/>
+                        <rect x="50" y="230" width="120" height="8" rx="4" fill="#10b981"/>
+                        <rect x="290" y="120" width="220" height="140" rx="10" fill="white" stroke="#e5e7eb" stroke-width="2"/>
+                        <rect x="300" y="135" width="100" height="30" rx="5" fill="#dbeafe"/>
+                        <text x="350" y="156" text-anchor="middle" fill="#1f2937" font-size="14" font-weight="bold">Projects</text>
+                        <text x="400" y="200" text-anchor="middle" fill="#0c2340" font-size="32" font-weight="bold">24</text>
+                        <rect x="540" y="120" width="220" height="140" rx="10" fill="white" stroke="#e5e7eb" stroke-width="2"/>
+                        <rect x="550" y="135" width="80" height="30" rx="5" fill="#dbeafe"/>
+                        <text x="590" y="156" text-anchor="middle" fill="#1f2937" font-size="14" font-weight="bold">Vessels</text>
+                        <text x="650" y="200" text-anchor="middle" fill="#0c2340" font-size="32" font-weight="bold">12</text>
+                        <rect x="40" y="290" width="720" height="260" rx="10" fill="white" stroke="#e5e7eb" stroke-width="2"/>
+                        <text x="50" y="315" fill="#1f2937" font-size="16" font-weight="bold">Cost Trend Analysis</text>
+                        <polyline points="60,480 120,450 180,470 240,420 300,440 360,400 420,430 480,390 540,410 600,370 660,390 720,350" fill="none" stroke="#00d4ff" stroke-width="3"/>
+                        <line x1="60" y1="340" x2="60" y2="500" stroke="#e5e7eb" stroke-width="2"/>
+                        <line x1="60" y1="500" x2="720" y2="500" stroke="#e5e7eb" stroke-width="2"/>
+                    </svg>
+                    <div class="floating-card card-1">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 40px; height: 40px; background: #10b981; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24" height="24">
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary);">Budget Approved</div>
+                                <div style="font-weight: bold; color: var(--text-primary);">Project NS-001</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="floating-card card-2">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 40px; height: 40px; background: #f59e0b; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24" height="24">
+                                    <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div style="font-size: 0.85rem; color: var(--text-secondary);">Cost Alert</div>
+                                <div style="font-weight: bold; color: var(--text-primary);">+15% Variance</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="features" id="features">
+            <div class="section-header">
+                <div class="subtitle">WHY CHOOSE US</div>
+                <h2>Powerful Features for Maritime Cost Control</h2>
+                <p>Everything you need to manage costs efficiently across your marine operations</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                        </svg>
+                    </div>
+                    <h3>Real-Time Analytics</h3>
+                    <p>Monitor costs, budgets, and variances in real-time with interactive dashboards and customizable reports.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                        </svg>
+                    </div>
+                    <h3>Project Tracking</h3>
+                    <p>Track costs across multiple projects and vessels with detailed breakdown and variance analysis.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <h3>Automated Workflows</h3>
+                    <p>Streamline approvals with customizable workflows for purchase orders, budget changes, and cost entries.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- ========================================
+         2. LOGIN PAGE
+    ======================================== -->
+    <div class="page-container" id="loginPage">
+        <div class="auth-page">
+            <div class="wave"></div>
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="logo-section">
+                        <div class="logo">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M12 2L4.5 7.5v9l7.5 5.5 7.5-5.5v-9L12 2zm0 2.18l5.5 3.82v6l-5.5 4-5.5-4v-6l5.5-3.82z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </div>
+                        <h1>Mermaid Maritime</h1>
+                        <p>Cost Management Platform</p>
+                    </div>
+                    <form id="loginForm" onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label for="username">Username or Email</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                    </svg>
+                                </span>
+                                <input type="text" id="username" placeholder="Enter your username or email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6z"/>
+                                    </svg>
+                                </span>
+                                <input type="password" id="password" placeholder="Enter your password" required>
+                                <span class="password-toggle" onclick="togglePassword('password')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">Remember me</label>
+                            </div>
+                            <a href="#" class="text-link">Forgot Password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">
+                            <span>Sign In</span>
+                        </button>
+                    </form>
+                    <div class="divider">
+                        <span>OR SIGN IN WITH</span>
+                    </div>
+                    <div class="sso-buttons">
+                        <button class="btn-sso" onclick="handleLogin(event)">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23">
+                                <path fill="#f3f3f3" d="M0 0h23v23H0z"/>
+                                <path fill="#f35325" d="M1 1h10v10H1z"/>
+                                <path fill="#81bc06" d="M12 1h10v10H12z"/>
+                                <path fill="#05a6f0" d="M1 12h10v10H1z"/>
+                                <path fill="#ffba08" d="M12 12h10v10H12z"/>
+                            </svg>
+                            <span>Sign in with Microsoft</span>
+                        </button>
+                        <button class="btn-sso" onclick="handleLogin(event)">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                                <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+                                <path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+                                <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+                                <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+                            </svg>
+                            <span>Sign in with Google</span>
+                        </button>
+                    </div>
+                    <div class="text-center">
+                        Need help? <a href="#" class="text-link">Contact Support</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ========================================
+         3. MODULE SELECTION PAGE
+    ======================================== -->
+    <div class="page-container" id="moduleSelectionPage">
+        <div class="module-selection-page">
+            <div class="wave"></div>
+            <div class="module-container">
+                <div class="module-header">
+                    <div class="logo-container">
+                        <div class="module-logo">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M12 2L4.5 7.5v9l7.5 5.5 7.5-5.5v-9L12 2zm0 2.18l5.5 3.82v6l-5.5 4-5.5-4v-6l5.5-3.82z"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h1>Mermaid Maritime</h1>
+                    <p>Cost Management Platform - Module Selection</p>
+                </div>
+                <div class="modules-grid">
+                    <!-- CFO Portal -->
+                    <div class="module-card cfo" onclick="accessModule('cfo')">
+                        <div class="module-icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                            </svg>
+                        </div>
+                        <h2>CFO/Management Portal</h2>
+                        <h3>Enterprise Dashboard</h3>
+                        <p>Executive-level insights for strategic decision making with real-time financial analytics and KPI monitoring.</p>
+                        <ul class="module-features">
+                            <li>Enterprise-wide Cost Overview</li>
+                            <li>Project Portfolio Analytics</li>
+                            <li>Financial KPIs & Metrics</li>
+                            <li>Budget vs Actual Analysis</li>
+                            <li>Profitability Dashboard</li>
+                            <li>Forecasting & Trends</li>
+                        </ul>
+                        <button class="access-button">Access Dashboard</button>
+                    </div>
+                    <!-- PM/PC Portal -->
+                    <div class="module-card pm" onclick="accessModule('pm')">
+                        <div class="module-icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                            </svg>
+                        </div>
+                        <h2>PM/PC Portal</h2>
+                        <h3>Project Cost Control</h3>
+                        <p>Comprehensive project management tools for tracking costs, budgets, and resources in real-time.</p>
+                        <ul class="module-features">
+                            <li>Project Cost Tracking</li>
+                            <li>Budget Management & Allocation</li>
+                            <li>Vessel Operations Cost</li>
+                            <li>Procurement & PO Management</li>
+                            <li>Time & Expense Entry</li>
+                            <li>Variance Reports & Alerts</li>
+                        </ul>
+                        <button class="access-button">Access Portal</button>
+                    </div>
+                    <!-- Admin Portal -->
+                    <div class="module-card admin" onclick="accessModule('admin')">
+                        <div class="module-icon-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                            </svg>
+                        </div>
+                        <h2>Admin Portal</h2>
+                        <h3>System Administration</h3>
+                        <p>Complete control over system configuration, user management, and workflow customization.</p>
+                        <ul class="module-features">
+                            <li>Master Data Management</li>
+                            <li>User & Role Administration</li>
+                            <li>Workflow Configuration</li>
+                            <li>Access Control & Security</li>
+                            <li>System Settings & Integration</li>
+                            <li>Audit Logs & Compliance</li>
+                        </ul>
+                        <button class="access-button">Access Admin</button>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <div class="user-info-left">
+                        <div class="user-avatar">JD</div>
+                        <div class="user-details">
+                            <h4>John Doe</h4>
+                            <p>Senior Financial Analyst | Last login: 16 Jan 2026, 02:55</p>
+                        </div>
+                    </div>
+                    <button class="logout-button" onclick="showPage('homePage')">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ========================================
+         4. PROJECT COST REPORT PAGE
+    ======================================== -->
+    <div class="page-container" id="projectCostPage">
+        <div class="project-cost-page">
+            <!-- TOP NAVIGATION -->
+            <div class="top-nav">
+                <div class="pc-nav-container">
+                    <div class="nav-left">
+                        <button class="back-button" onclick="goBackToModules()">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                            </svg>
+                            Back
+                        </button>
+                        <h1 class="page-title">
+                            <span class="page-title-icon">📊</span>
+                            Project Cost Report
+                        </h1>
+                    </div>
+                    <div class="nav-actions">
+                        <button class="btn btn-primary" onclick="refreshData()">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                                <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                            </svg>
+                            Refresh
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- MAIN CONTAINER -->
+            <div class="main-container">
+                <!-- Welcome Banner -->
+                <div class="welcome-banner">
+                    <div class="welcome-content">
+                        <h2>Welcome! 👋</h2>
+                        <p>Your portfolio overview dashboard</p>
+                    </div>
+                    <div class="quick-stats">
+                        <div class="quick-stat-item">
+                            <span class="quick-stat-value">10</span>
+                            <span class="quick-stat-label">Total Projects</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- SUMMARY SECTION -->
+                <div class="summary-section">
+                    <div class="summary-header">
+                        <h2>
+                            <span class="section-icon">📈</span>
+                            Portfolio Overview
+                        </h2>
+                        <div class="filter-controls">
+                            <select class="date-filter">
+                                <option>This Year (2026)</option>
+                                <option>Last 12 Months</option>
+                                <option>Q4 2025</option>
+                                <option>Custom Range</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="summary-grid">
+                        <!-- Area 1: Health Status (CPI Based) -->
+                        <div class="summary-area">
+                            <div class="area-title">🏥 Health Status (CPI Based)</div>
+                            <div class="health-cards">
+                                <div class="summary-card cpi-safe" onclick="filterByStatus('green')">
+                                    <span class="card-icon">✅</span>
+                                    <div class="card-label">Safe</div>
+                                    <div class="card-value">6</div>
+                                    <div class="card-subtitle">CPI ≥ 1.00</div>
+                                </div>
+                                <div class="summary-card cpi-watch" onclick="filterByStatus('yellow')">
+                                    <span class="card-icon">⚠️</span>
+                                    <div class="card-label">Watch</div>
+                                    <div class="card-value">3</div>
+                                    <div class="card-subtitle">CPI 0.95-0.99</div>
+                                </div>
+                                <div class="summary-card cpi-alert" onclick="filterByStatus('red')">
+                                    <span class="card-icon">🚨</span>
+                                    <div class="card-label">Alert</div>
+                                    <div class="card-value">1</div>
+                                    <div class="card-subtitle">CPI < 0.95</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Area 2: Financial Overview -->
+                        <div class="summary-area">
+                            <div class="area-title">💰 Financial Overview</div>
+                            <div class="financial-cards">
+                                <div class="summary-card financial">
+                                    <span class="card-icon">💸</span>
+                                    <div class="card-label">Cost Exposure</div>
+                                    <div class="card-value">$300K</div>
+                                    <div class="card-subtitle">Over Budget</div>
+                                </div>
+                                <div class="summary-card financial">
+                                    <span class="card-icon">💰</span>
+                                    <div class="card-label">Potential Save</div>
+                                    <div class="card-value">$150K</div>
+                                    <div class="card-subtitle">Under Budget</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- PROJECTS LIST SECTION -->
+                <div class="projects-section">
+                    <div class="pc-section-header">
+                        <h2>
+                            All Projects
+                            <span class="projects-count-badge">10 Total</span>
+                        </h2>
+                        <div class="search-filter">
+                            <div class="search-box">
+                                <span class="search-icon">🔍</span>
+                                <input type="text" placeholder="Search projects..." onkeyup="filterProjects(this.value)">
+                            </div>
+                            <select class="filter-dropdown" onchange="filterByStatus(this.value)">
+                                <option value="">All Status</option>
+                                <option value="green">Safe</option>
+                                <option value="yellow">Watch</option>
+                                <option value="red">Alert</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="projects-list-container">
+                        <table class="projects-table" id="projectsTable">
+                            <thead>
+                                <tr>
+                                    <th>Project No</th>
+                                    <th>Project Name</th>
+                                    <th style="text-align: right;">Revenue</th>
+                                    <th style="text-align: right;">Budget At Completion</th>
+                                    <th style="text-align: right;">Commit</th>
+                                    <th style="text-align: right;">Actual</th>
+                                    <th style="text-align: center;">%Actual</th>
+                                    <th style="text-align: right;">Commit + Actual</th>
+                                    <th style="text-align: right;">Available</th>
+                                    <th style="text-align: center;">%Available</th>
+                                    <th style="text-align: right;">ETC</th>
+                                    <th style="text-align: right;">EAC</th>
+                                    <th style="text-align: center;">%EAC</th>
+                                    <th style="text-align: right;">VAC</th>
+                                    <th style="text-align: center;">Physical % Complete</th>
+                                    <th style="text-align: center;">CPI</th>
+                                    <th style="text-align: center;">Health</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Project 1 -->
+                                <tr data-health="green" data-project-code="MSS/25001" onclick="openProjectDetail('Cost Management System', 'MSS/25001')">
+                                    <td data-label="Project No" class="project-no">MSS/25001</td>
+                                    <td data-label="Project Name" class="project-name" title="Cost Management System">Cost Mgmt Sys</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">500K</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">332K</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">100K</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">50K</td>
+                                    <td data-label="%Actual" class="percent-cell">15%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">150K</td>
+                                    <td data-label="Available" class="amount" style="text-align: right;">172K</td>
+                                    <td data-label="%Available" class="percent-cell">52%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">182K</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">332K</td>
+                                    <td data-label="%EAC" class="percent-cell">100%</td>
+                                    <td data-label="VAC" class="amount" style="text-align: right;">0</td>
+                                    <td data-label="Physical %" class="percent-cell">18%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-good">1.20</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-green">
+                                            <span class="health-icon">✓</span>
+                                            <span>Safe</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Project 2 -->
+                                <tr data-health="yellow" data-project-code="NS-2026-001" onclick="openProjectDetail('North Sea Pipeline', 'NS-2026-001')">
+                                    <td data-label="Project No" class="project-no">NS-2026-001</td>
+                                    <td data-label="Project Name" class="project-name" title="North Sea Pipeline Installation">N Sea Pipeline</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">6.5M</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">5.2M</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">300K</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">4.8M</td>
+                                    <td data-label="%Actual" class="percent-cell">92%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">5.1M</td>
+                                    <td data-label="Available" class="amount" style="text-align: right;">100K</td>
+                                    <td data-label="%Available" class="percent-cell">2%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">300K</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">5.1M</td>
+                                    <td data-label="%EAC" class="percent-cell">98%</td>
+                                    <td data-label="VAC" class="amount negative" style="text-align: right;">100K</td>
+                                    <td data-label="Physical %" class="percent-cell">95%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-warning">0.98</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-yellow">
+                                            <span class="health-icon">⚠</span>
+                                            <span>Watch</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Project 3 -->
+                                <tr data-health="red" data-project-code="SE-2026-002" onclick="openProjectDetail('Subsea Equipment', 'SE-2026-002')">
+                                    <td data-label="Project No" class="project-no">SE-2026-002</td>
+                                    <td data-label="Project Name" class="project-name" title="Subsea Equipment Installation">Subsea Equip</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">9.8M</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">8.5M</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">1.1M</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">7.2M</td>
+                                    <td data-label="%Actual" class="percent-cell">85%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">8.3M</td>
+                                    <td data-label="Available" class="amount negative" style="text-align: right;">-800K</td>
+                                    <td data-label="%Available" class="percent-cell">-9%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">1.6M</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">8.8M</td>
+                                    <td data-label="%EAC" class="percent-cell">104%</td>
+                                    <td data-label="VAC" class="amount negative" style="text-align: right;">300K</td>
+                                    <td data-label="Physical %" class="percent-cell">78%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-danger">0.92</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-red">
+                                            <span class="health-icon">✕</span>
+                                            <span>Alert</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Project 4 -->
+                                <tr data-health="green" data-project-code="GT-2026-003" onclick="openProjectDetail('Gulf of Thailand Survey', 'GT-2026-003')">
+                                    <td data-label="Project No" class="project-no">GT-2026-003</td>
+                                    <td data-label="Project Name" class="project-name" title="Gulf of Thailand Survey">Gulf Thailand</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">3.8M</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">3.2M</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">800K</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">500K</td>
+                                    <td data-label="%Actual" class="percent-cell">16%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">1.3M</td>
+                                    <td data-label="Available" class="amount" style="text-align: right;">1.9M</td>
+                                    <td data-label="%Available" class="percent-cell">59%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">2.7M</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">3.2M</td>
+                                    <td data-label="%EAC" class="percent-cell">100%</td>
+                                    <td data-label="VAC" class="amount" style="text-align: right;">0</td>
+                                    <td data-label="Physical %" class="percent-cell">20%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-good">1.25</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-green">
+                                            <span class="health-icon">✓</span>
+                                            <span>Safe</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Project 5 -->
+                                <tr data-health="green" data-project-code="OP-2025-015" onclick="openProjectDetail('Offshore Maintenance', 'OP-2025-015')">
+                                    <td data-label="Project No" class="project-no">OP-2025-015</td>
+                                    <td data-label="Project Name" class="project-name" title="Offshore Platform Maintenance">Offshore Maint</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">3.2M</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">2.8M</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">0</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">2.7M</td>
+                                    <td data-label="%Actual" class="percent-cell">96%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">2.7M</td>
+                                    <td data-label="Available" class="amount positive" style="text-align: right;">100K</td>
+                                    <td data-label="%Available" class="percent-cell">4%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">0</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">2.7M</td>
+                                    <td data-label="%EAC" class="percent-cell">96%</td>
+                                    <td data-label="VAC" class="amount positive" style="text-align: right;">-100K</td>
+                                    <td data-label="Physical %" class="percent-cell">100%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-good">1.04</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-green">
+                                            <span class="health-icon">✓</span>
+                                            <span>Safe</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Project 6 -->
+                                <tr data-health="green" data-project-code="VI-2026-004" onclick="openProjectDetail('Vessel Inspection Program', 'VI-2026-004')">
+                                    <td data-label="Project No" class="project-no">VI-2026-004</td>
+                                    <td data-label="Project Name" class="project-name" title="Vessel Inspection Program">Vessel Inspect</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">1.8M</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">1.5M</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">200K</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">900K</td>
+                                    <td data-label="%Actual" class="percent-cell">60%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">1.1M</td>
+                                    <td data-label="Available" class="amount" style="text-align: right;">400K</td>
+                                    <td data-label="%Available" class="percent-cell">27%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">600K</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">1.5M</td>
+                                    <td data-label="%EAC" class="percent-cell">100%</td>
+                                    <td data-label="VAC" class="amount" style="text-align: right;">0</td>
+                                    <td data-label="Physical %" class="percent-cell">65%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-good">1.08</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-green">
+                                            <span class="health-icon">✓</span>
+                                            <span>Safe</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Project 7 -->
+                                <tr data-health="yellow" data-project-code="ROV-2026-005" onclick="openProjectDetail('ROV Services Contract', 'ROV-2026-005')">
+                                    <td data-label="Project No" class="project-no">ROV-2026-005</td>
+                                    <td data-label="Project Name" class="project-name" title="ROV Services Contract">ROV Services</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">4.2M</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">3.5M</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">500K</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">2.9M</td>
+                                    <td data-label="%Actual" class="percent-cell">83%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">3.4M</td>
+                                    <td data-label="Available" class="amount" style="text-align: right;">100K</td>
+                                    <td data-label="%Available" class="percent-cell">3%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">600K</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">3.5M</td>
+                                    <td data-label="%EAC" class="percent-cell">100%</td>
+                                    <td data-label="VAC" class="amount" style="text-align: right;">0</td>
+                                    <td data-label="Physical %" class="percent-cell">85%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-warning">0.97</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-yellow">
+                                            <span class="health-icon">⚠</span>
+                                            <span>Watch</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Project 8 -->
+                                <tr data-health="green" data-project-code="DSS-2026-006" onclick="openProjectDetail('Diving Support Services', 'DSS-2026-006')">
+                                    <td data-label="Project No" class="project-no">DSS-2026-006</td>
+                                    <td data-label="Project Name" class="project-name" title="Diving Support Services">Diving Support</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">2.5M</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">2.1M</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">300K</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">1.2M</td>
+                                    <td data-label="%Actual" class="percent-cell">57%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">1.5M</td>
+                                    <td data-label="Available" class="amount" style="text-align: right;">600K</td>
+                                    <td data-label="%Available" class="percent-cell">29%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">900K</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">2.1M</td>
+                                    <td data-label="%EAC" class="percent-cell">100%</td>
+                                    <td data-label="VAC" class="amount" style="text-align: right;">0</td>
+                                    <td data-label="Physical %" class="percent-cell">60%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-good">1.05</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-green">
+                                            <span class="health-icon">✓</span>
+                                            <span>Safe</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Project 9 -->
+                                <tr data-health="yellow" data-project-code="MC-2026-007" onclick="openProjectDetail('Marine Construction', 'MC-2026-007')">
+                                    <td data-label="Project No" class="project-no">MC-2026-007</td>
+                                    <td data-label="Project Name" class="project-name" title="Marine Construction Project">Marine Constr</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">5.5M</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">4.8M</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">600K</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">4.1M</td>
+                                    <td data-label="%Actual" class="percent-cell">85%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">4.7M</td>
+                                    <td data-label="Available" class="amount" style="text-align: right;">100K</td>
+                                    <td data-label="%Available" class="percent-cell">2%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">700K</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">4.8M</td>
+                                    <td data-label="%EAC" class="percent-cell">100%</td>
+                                    <td data-label="VAC" class="amount" style="text-align: right;">0</td>
+                                    <td data-label="Physical %" class="percent-cell">88%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-warning">0.96</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-yellow">
+                                            <span class="health-icon">⚠</span>
+                                            <span>Watch</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Project 10 -->
+                                <tr data-health="green" data-project-code="CTS-2026-008" onclick="openProjectDetail('Crew Transfer Services', 'CTS-2026-008')">
+                                    <td data-label="Project No" class="project-no">CTS-2026-008</td>
+                                    <td data-label="Project Name" class="project-name" title="Crew Transfer Services">Crew Transfer</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">1.2M</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">1.0M</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">150K</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">600K</td>
+                                    <td data-label="%Actual" class="percent-cell">60%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">750K</td>
+                                    <td data-label="Available" class="amount" style="text-align: right;">250K</td>
+                                    <td data-label="%Available" class="percent-cell">25%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">400K</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">1.0M</td>
+                                    <td data-label="%EAC" class="percent-cell">100%</td>
+                                    <td data-label="VAC" class="amount" style="text-align: right;">0</td>
+                                    <td data-label="Physical %" class="percent-cell">65%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-good">1.08</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-green">
+                                            <span class="health-icon">✓</span>
+                                            <span>Safe</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <!-- SUMMARY ROW -->
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="summary-label">
+                                            <span class="summary-icon">📊</span>
+                                            <strong>TOTAL SUMMARY</strong>
+                                        </div>
+                                    </td>
+                                    <td class="amount" style="text-align: right; font-weight: 800;">38.7M</td>
+                                    <td class="amount" style="text-align: right; font-weight: 800;">32.4M</td>
+                                    <td class="amount" style="text-align: right; font-weight: 800;">4.05M</td>
+                                    <td class="amount" style="text-align: right; font-weight: 800;">24.85M</td>
+                                    <td class="percent-cell" style="font-weight: 800;">77%</td>
+                                    <td class="amount" style="text-align: right; font-weight: 800; color: var(--primary);">28.9M</td>
+                                    <td class="amount" style="text-align: right; font-weight: 800;">3.22M</td>
+                                    <td class="percent-cell" style="font-weight: 800;">10%</td>
+                                    <td class="amount" style="text-align: right; font-weight: 800;">8.98M</td>
+                                    <td class="amount" style="text-align: right; font-weight: 800;">33.8M</td>
+                                    <td class="percent-cell" style="font-weight: 800;">104%</td>
+                                    <td class="amount negative" style="text-align: right; font-weight: 800;">1.4M</td>
+                                    <td class="percent-cell" style="font-weight: 800;">67%</td>
+                                    <td class="cpi-cell" style="font-weight: 800; font-size: 0.8rem; color: var(--warning);">1.03</td>
+                                    <td style="text-align: center; font-weight: 800; font-size: 0.7rem;">
+                                        <span style="color: #00c853;">6 Safe</span> /
+                                        <span style="color: #ff9800;">3 Watch</span> /
+                                        <span style="color: #f44336;">1 Alert</span>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PROJECT DETAIL MODAL -->
+    <div class="modal-overlay" id="projectModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2>
+                    <span class="modal-title-icon">📁</span>
+                    <span id="modalProjectTitle">Project Name</span>
+                </h2>
+                <button class="close-modal" onclick="closeProjectDetail()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="menu-grid">
+                    <!-- Menu 1: Plan Revenue/Cost -->
+                    <div class="menu-card" onclick="openMenu('planRevenueCost')">
+                        <span class="menu-card-icon">💰</span>
+                        <div class="menu-card-title">Plan Revenue/Cost</div>
+                        <div class="menu-card-subtitle">View budget & revenue planning</div>
+                    </div>
+                    <!-- Menu 2: Cost Report -->
+                    <div class="menu-card" onclick="openMenu('costReport')">
+                        <span class="menu-card-icon">📊</span>
+                        <div class="menu-card-title">Cost Report</div>
+                        <div class="menu-card-subtitle">Detailed cost analysis</div>
+                    </div>
+                    <!-- Menu 3: Revenue -->
+                    <div class="menu-card" onclick="openMenu('revenue')">
+                        <span class="menu-card-icon">💵</span>
+                        <div class="menu-card-title">Revenue</div>
+                        <div class="menu-card-subtitle">Revenue tracking & invoicing</div>
+                    </div>
+                    <!-- Menu 4: Expenses -->
+                    <div class="menu-card" onclick="openMenu('expenses')">
+                        <span class="menu-card-icon">💳</span>
+                        <div class="menu-card-title">Expenses</div>
+                        <div class="menu-card-subtitle">Expense transactions</div>
+                    </div>
+                    <!-- Menu 5: Spending & Forecast -->
+                    <div class="menu-card" onclick="openMenu('spendingForecast')">
+                        <span class="menu-card-icon">📈</span>
+                        <div class="menu-card-title">Spending & Forecast</div>
+                        <div class="menu-card-subtitle">S-Curve & projections</div>
+                    </div>
+                    <!-- Menu 6: EVM -->
+                    <div class="menu-card" onclick="openMenu('evm')">
+                        <span class="menu-card-icon">🎯</span>
+                        <div class="menu-card-title">EVM</div>
+                        <div class="menu-card-subtitle">Earned value management</div>
+                    </div>
+                    <!-- Menu 7: Transactions -->
+                    <div class="menu-card" onclick="openMenu('transactions')">
+                        <span class="menu-card-icon">📝</span>
+                        <div class="menu-card-title">Transactions</div>
+                        <div class="menu-card-subtitle">All transaction history</div>
+                    </div>
+                    <!-- Menu 8: GL Expense -->
+                    <div class="menu-card" onclick="openMenu('glExpense')">
+                        <span class="menu-card-icon">📚</span>
+                        <div class="menu-card-title">GL Expense</div>
+                        <div class="menu-card-subtitle">General ledger accounts</div>
+                    </div>
+                    <!-- Menu 9: Commitments -->
+                    <div class="menu-card" onclick="openMenu('commitments')">
+                        <span class="menu-card-icon">🤝</span>
+                        <div class="menu-card-title">Commitments</div>
+                        <div class="menu-card-subtitle">Purchase orders & POs</div>
+                    </div>
+                    <!-- Menu 10: Change Management -->
+                    <div class="menu-card" onclick="openMenu('changeManagement')">
+                        <span class="menu-card-icon">🔄</span>
+                        <div class="menu-card-title">Change Management</div>
+                        <div class="menu-card-subtitle">Change orders & variations</div>
+                    </div>
+                    <!-- Menu 11: Contract Documents -->
+                    <div class="menu-card" onclick="openMenu('contractDocuments')">
+                        <span class="menu-card-icon">📄</span>
+                        <div class="menu-card-title">Contract Documents</div>
+                        <div class="menu-card-subtitle">Contracts & agreements</div>
+                    </div>
+                    <!-- Menu 12: Project Reports -->
+                    <div class="menu-card" onclick="openMenu('projectReports')">
+                        <span class="menu-card-icon">📑</span>
+                        <div class="menu-card-title">Project Reports</div>
+                        <div class="menu-card-subtitle">Comprehensive reports</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">⬆️</button>
+    <script>
+        // Store current project code globally
+        let currentProjectCode = '';
+        
+        // Menu URL mappings
+        const menuURLs = {
+            'planRevenueCost': 'https://pcs-jl.github.io/Plan/',
+            'costReport': 'https://pcs-jl.github.io/Cost/',
+            'revenue': 'https://pcs-jl.github.io/Revenue/',
+            'expenses': 'https://pcs-jl.github.io/Expenses/',
+            'spendingForecast': 'https://pcs-jl.github.io/Spending/'
+        };
+        
+        // Page Navigation System
+        function showPage(pageId) {
+            document.querySelectorAll('.page-container').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+            console.log('Navigated to:', pageId);
+        }
+        
+        // Login Handler
+        function handleLogin(event) {
+            event.preventDefault();
+            const btn = event.target.tagName === 'FORM' ?
+                        event.target.querySelector('button[type="submit"]') :
+                        event.target.closest('button');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<span class="spinner"></span> <span>Signing In...</span>';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+                showPage('moduleSelectionPage');
+            }, 1500);
+        }
+        
+        // Module Access - Modified to redirect PM Portal to Project Cost Page
+        function accessModule(module) {
+            if (module === 'pm') {
+                showPage('projectCostPage');
+            } else {
+                alert(`Opening ${module.toUpperCase()} Portal...\n\n(Module functionality will be implemented here)`);
+            }
+        }
+        
+        // Go Back to Module Selection from Project Cost Page
+        function goBackToModules() {
+            showPage('moduleSelectionPage');
+        }
+        
+        // Toggle Password
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+        
+        // Request Demo
+        function requestDemo() {
+            alert('Thank you for your interest!\n\nOur team will contact you within 24 hours to schedule a personalized demo.');
+        }
+        
+        // Refresh Data
+        function refreshData() {
+            const btn = event.target.closest('button');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<div class="spinner"></div>';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+                alert('Data refreshed successfully!');
+            }, 1500);
+        }
+        
+        // Filter Projects
+        function filterProjects(searchTerm) {
+            const rows = document.querySelectorAll('#projectsTable tbody tr');
+            searchTerm = searchTerm.toLowerCase();
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        }
+        
+        // Filter By Status
+        function filterByStatus(health) {
+            const rows = document.querySelectorAll('#projectsTable tbody tr');
+            rows.forEach(row => {
+                if (health === '' || row.dataset.health === health) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+        
+        // Open Project Detail Modal
+        function openProjectDetail(projectName, projectCode) {
+            currentProjectCode = projectCode;
+            document.getElementById('modalProjectTitle').textContent = projectName + ' (' + projectCode + ')';
+            document.getElementById('projectModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Close Project Detail Modal
+        function closeProjectDetail() {
+            document.getElementById('projectModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            currentProjectCode = '';
+        }
+        
+        // Open Menu - Modified to open external URLs in new window
+        function openMenu(menuType) {
+            // Check if this menu has a URL mapping
+            if (menuURLs[menuType]) {
+                // Open in new window
+                window.open(menuURLs[menuType], '_blank');
+                console.log(`Opening ${menuType} for project: ${currentProjectCode} at ${menuURLs[menuType]}`);
+            } else {
+                // For menus without URL mapping, show alert
+                alert(`Opening ${menuType} for project: ${currentProjectCode}\n\nThis would open a new page/view with detailed ${menuType} information.`);
+            }
+        }
+        
+        // Close modal on outside click
+        document.getElementById('projectModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProjectDetail();
+            }
+        });
+        
+        // Close modal on ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeProjectDetail();
+            }
+        });
+        
+        // Scroll Functions
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const scrollTop = document.getElementById('scrollTop');
+            if (navbar && window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else if (navbar) {
+                navbar.classList.remove('scrolled');
+            }
+            if (scrollTop && window.scrollY > 300) {
+                scrollTop.classList.add('show');
+            } else if (scrollTop) {
+                scrollTop.classList.remove('show');
+            }
+        });
+        
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href.length > 1) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Debounced resize handler
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                console.log('Window resized');
+            }, 250);
+        });
+    </script>
+</body>
+</html>
+
+							<script>
+                            	
+							</script>
+                        </body>
+                        </html>
+                    
