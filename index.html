@@ -1,19 +1,4 @@
-
-                        <!DOCTYPE html>
-                        <html lang="en">
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-							<style>
-								body {
-									background-color: white; /* Ensure the iframe has a white background */
-								}
-
-								
-							</style>
-                        </head>
-                        <body>
-                            <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1410,7 +1395,7 @@
         }
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 20px;
             max-width: 1100px;
             margin: 0 auto;
@@ -2380,72 +2365,60 @@
             <div class="modal-body">
                 <div class="menu-grid">
                     <!-- Menu 1: Plan Revenue/Cost -->
-                    <div class="menu-card" onclick="openMenu('planRevenueCost')">
+                    <div class="menu-card" onclick="openMenuURL('https://pcs-jl.github.io/Plan/')">
                         <span class="menu-card-icon">💰</span>
                         <div class="menu-card-title">Plan Revenue/Cost</div>
                         <div class="menu-card-subtitle">View budget & revenue planning</div>
                     </div>
                     <!-- Menu 2: Cost Report -->
-                    <div class="menu-card" onclick="openMenu('costReport')">
+                    <div class="menu-card" onclick="openMenuURL('https://pcs-jl.github.io/Cost/')">
                         <span class="menu-card-icon">📊</span>
                         <div class="menu-card-title">Cost Report</div>
                         <div class="menu-card-subtitle">Detailed cost analysis</div>
                     </div>
                     <!-- Menu 3: Revenue -->
-                    <div class="menu-card" onclick="openMenu('revenue')">
+                    <div class="menu-card" onclick="openMenuURL('https://pcs-jl.github.io/Revenue/')">
                         <span class="menu-card-icon">💵</span>
                         <div class="menu-card-title">Revenue</div>
                         <div class="menu-card-subtitle">Revenue tracking & invoicing</div>
                     </div>
                     <!-- Menu 4: Expenses -->
-                    <div class="menu-card" onclick="openMenu('expenses')">
+                    <div class="menu-card" onclick="openMenuURL('https://pcs-jl.github.io/Expenses/')">
                         <span class="menu-card-icon">💳</span>
                         <div class="menu-card-title">Expenses</div>
                         <div class="menu-card-subtitle">Expense transactions</div>
                     </div>
                     <!-- Menu 5: Spending & Forecast -->
-                    <div class="menu-card" onclick="openMenu('spendingForecast')">
+                    <div class="menu-card" onclick="openMenuURL('https://pcs-jl.github.io/Spending/')">
                         <span class="menu-card-icon">📈</span>
                         <div class="menu-card-title">Spending & Forecast</div>
                         <div class="menu-card-subtitle">S-Curve & projections</div>
                     </div>
-                    <!-- Menu 6: EVM -->
-                    <div class="menu-card" onclick="openMenu('evm')">
-                        <span class="menu-card-icon">🎯</span>
-                        <div class="menu-card-title">EVM</div>
-                        <div class="menu-card-subtitle">Earned value management</div>
-                    </div>
-                    <!-- Menu 7: Transactions -->
+                    <!-- Menu 6: Transactions -->
                     <div class="menu-card" onclick="openMenu('transactions')">
                         <span class="menu-card-icon">📝</span>
                         <div class="menu-card-title">Transactions</div>
                         <div class="menu-card-subtitle">All transaction history</div>
                     </div>
-                    <!-- Menu 8: GL Expense -->
+                    <!-- Menu 7: GL Expense -->
                     <div class="menu-card" onclick="openMenu('glExpense')">
                         <span class="menu-card-icon">📚</span>
                         <div class="menu-card-title">GL Expense</div>
                         <div class="menu-card-subtitle">General ledger accounts</div>
                     </div>
-                    <!-- Menu 9: Commitments -->
+                    <!-- Menu 8: Commitments -->
                     <div class="menu-card" onclick="openMenu('commitments')">
                         <span class="menu-card-icon">🤝</span>
                         <div class="menu-card-title">Commitments</div>
                         <div class="menu-card-subtitle">Purchase orders & POs</div>
                     </div>
-                    <!-- Menu 10: Change Management -->
+                    <!-- Menu 9: Change Management -->
                     <div class="menu-card" onclick="openMenu('changeManagement')">
                         <span class="menu-card-icon">🔄</span>
                         <div class="menu-card-title">Change Management</div>
                         <div class="menu-card-subtitle">Change orders & variations</div>
                     </div>
-                    <!-- Menu 11: Contract Documents -->
-                    <div class="menu-card" onclick="openMenu('contractDocuments')">
-                        <span class="menu-card-icon">📄</span>
-                        <div class="menu-card-title">Contract Documents</div>
-                        <div class="menu-card-subtitle">Contracts & agreements</div>
-                    </div>
-                    <!-- Menu 12: Project Reports -->
+                    <!-- Menu 10: Project Reports -->
                     <div class="menu-card" onclick="openMenu('projectReports')">
                         <span class="menu-card-icon">📑</span>
                         <div class="menu-card-title">Project Reports</div>
@@ -2460,15 +2433,6 @@
     <script>
         // Store current project code globally
         let currentProjectCode = '';
-        
-        // Menu URL mappings
-        const menuURLs = {
-            'planRevenueCost': 'https://pcs-jl.github.io/Plan/',
-            'costReport': 'https://pcs-jl.github.io/Cost/',
-            'revenue': 'https://pcs-jl.github.io/Revenue/',
-            'expenses': 'https://pcs-jl.github.io/Expenses/',
-            'spendingForecast': 'https://pcs-jl.github.io/Spending/'
-        };
         
         // Page Navigation System
         function showPage(pageId) {
@@ -2571,17 +2535,15 @@
             currentProjectCode = '';
         }
         
-        // Open Menu - Modified to open external URLs in new window
+        // Open Menu URL - Direct link to external URL
+        function openMenuURL(url) {
+            window.open(url, '_blank');
+            console.log(`Opening URL for project ${currentProjectCode}: ${url}`);
+        }
+        
+        // Open Menu - For menus without URL
         function openMenu(menuType) {
-            // Check if this menu has a URL mapping
-            if (menuURLs[menuType]) {
-                // Open in new window
-                window.open(menuURLs[menuType], '_blank');
-                console.log(`Opening ${menuType} for project: ${currentProjectCode} at ${menuURLs[menuType]}`);
-            } else {
-                // For menus without URL mapping, show alert
-                alert(`Opening ${menuType} for project: ${currentProjectCode}\n\nThis would open a new page/view with detailed ${menuType} information.`);
-            }
+            alert(`Opening ${menuType} for project: ${currentProjectCode}\n\nThis would open a new page/view with detailed ${menuType} information.`);
         }
         
         // Close modal on outside click
@@ -2649,10 +2611,3 @@
     </script>
 </body>
 </html>
-
-							<script>
-                            	
-							</script>
-                        </body>
-                        </html>
-                    
