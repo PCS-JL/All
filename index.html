@@ -814,86 +814,6 @@
             transform: scale(1.05);
         }
         /* ========================================
-           CFO/MANAGEMENT PORTAL PAGE - NEW!
-        ======================================== */
-        .cfo-portal-page {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-        }
-        .cfo-top-nav {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            color: white;
-            padding: 18px 0;
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        .cfo-nav-container {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 0 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-            z-index: 10;
-        }
-        .cfo-main-container {
-            max-width: 1600px;
-            margin: 30px auto;
-            padding: 0 30px;
-        }
-        .cfo-dashboard-container {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-        .cfo-dashboard-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .cfo-dashboard-header h1 {
-            font-size: 2rem;
-            color: var(--text-primary);
-            margin-bottom: 10px;
-        }
-        .cfo-dashboard-header p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-        .cfo-dashboard-image {
-            width: 100%;
-            max-width: 100%;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            border: 3px solid #e5e7eb;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .cfo-dashboard-image:hover {
-            transform: scale(1.02);
-            box-shadow: 0 15px 50px rgba(99, 102, 241, 0.3);
-            border-color: #6366f1;
-        }
-        .loading-spinner {
-            text-align: center;
-            padding: 60px 20px;
-        }
-        .loading-spinner .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(99, 102, 241, 0.2);
-            border-top-color: #6366f1;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-        .loading-text {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-        /* ========================================
            PROJECT COST REPORT PAGE STYLES
         ======================================== */
         .project-cost-page {
@@ -1995,57 +1915,8 @@
             </div>
         </div>
     </div>
-    
     <!-- ========================================
-         4. CFO/MANAGEMENT PORTAL PAGE - NEW!
-    ======================================== -->
-    <div class="page-container" id="cfoPortalPage">
-        <div class="cfo-portal-page">
-            <!-- TOP NAVIGATION -->
-            <div class="cfo-top-nav">
-                <div class="cfo-nav-container">
-                    <div class="nav-left">
-                        <button class="back-button" onclick="goBackToModules()">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-                            </svg>
-                            Back
-                        </button>
-                        <h1 class="page-title">
-                            <span class="page-title-icon">📊</span>
-                            CFO/Management Dashboard
-                        </h1>
-                    </div>
-                    <div class="nav-actions">
-                        <button class="btn btn-primary" onclick="refreshData()">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
-                                <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
-                            </svg>
-                            Refresh
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <!-- MAIN CONTAINER -->
-            <div class="cfo-main-container">
-                <div class="cfo-dashboard-container">
-                    <div class="cfo-dashboard-header">
-                        <h1>Enterprise Dashboard</h1>
-                        <p>Comprehensive overview of all projects and financial metrics</p>
-                    </div>
-                    <div id="dashboardImageContainer">
-                        <div class="loading-spinner">
-                            <div class="spinner"></div>
-                            <p class="loading-text">Loading enterprise dashboard...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ========================================
-         5. PROJECT COST REPORT PAGE
+         4. PROJECT COST REPORT PAGE
     ======================================== -->
     <div class="page-container" id="projectCostPage">
         <div class="project-cost-page">
@@ -2219,7 +2090,231 @@
                                         </span>
                                     </td>
                                 </tr>
-                                <!-- Additional project rows truncated for brevity - use same structure as original -->
+                                <!-- Project 2 -->
+                                <tr data-health="yellow" data-project-code="NS-2026-001" onclick="openProjectDetail('North Sea Pipeline', 'NS-2026-001')">
+                                    <td data-label="Project No" class="project-no">NS-2026-001</td>
+                                    <td data-label="Project Name" class="project-name" title="North Sea Pipeline Installation">N Sea Pipeline</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">6.5M</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">5.2M</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">300K</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">4.8M</td>
+                                    <td data-label="%Actual" class="percent-cell">92%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">5.1M</td>
+                                    <td data-label="Available" class="amount" style="text-align: right;">100K</td>
+                                    <td data-label="%Available" class="percent-cell">2%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">300K</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">5.1M</td>
+                                    <td data-label="%EAC" class="percent-cell">98%</td>
+                                    <td data-label="VAC" class="amount negative" style="text-align: right;">100K</td>
+                                    <td data-label="Physical %" class="percent-cell">95%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-warning">0.98</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-yellow">
+                                            <span class="health-icon">⚠</span>
+                                            <span>Watch</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Project 3 -->
+                                <tr data-health="red" data-project-code="SE-2026-002" onclick="openProjectDetail('Subsea Equipment', 'SE-2026-002')">
+                                    <td data-label="Project No" class="project-no">SE-2026-002</td>
+                                    <td data-label="Project Name" class="project-name" title="Subsea Equipment Installation">Subsea Equip</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">9.8M</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">8.5M</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">1.1M</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">7.2M</td>
+                                    <td data-label="%Actual" class="percent-cell">85%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">8.3M</td>
+                                    <td data-label="Available" class="amount negative" style="text-align: right;">-800K</td>
+                                    <td data-label="%Available" class="percent-cell">-9%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">1.6M</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">8.8M</td>
+                                    <td data-label="%EAC" class="percent-cell">104%</td>
+                                    <td data-label="VAC" class="amount negative" style="text-align: right;">300K</td>
+                                    <td data-label="Physical %" class="percent-cell">78%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-danger">0.92</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-red">
+                                            <span class="health-icon">✕</span>
+                                            <span>Alert</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Project 4 -->
+                                <tr data-health="green" data-project-code="GT-2026-003" onclick="openProjectDetail('Gulf of Thailand Survey', 'GT-2026-003')">
+                                    <td data-label="Project No" class="project-no">GT-2026-003</td>
+                                    <td data-label="Project Name" class="project-name" title="Gulf of Thailand Survey">Gulf Thailand</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">3.8M</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">3.2M</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">800K</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">500K</td>
+                                    <td data-label="%Actual" class="percent-cell">16%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">1.3M</td>
+                                    <td data-label="Available" class="amount" style="text-align: right;">1.9M</td>
+                                    <td data-label="%Available" class="percent-cell">59%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">2.7M</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">3.2M</td>
+                                    <td data-label="%EAC" class="percent-cell">100%</td>
+                                    <td data-label="VAC" class="amount" style="text-align: right;">0</td>
+                                    <td data-label="Physical %" class="percent-cell">20%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-good">1.25</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-green">
+                                            <span class="health-icon">✓</span>
+                                            <span>Safe</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Project 5 -->
+                                <tr data-health="green" data-project-code="OP-2025-015" onclick="openProjectDetail('Offshore Maintenance', 'OP-2025-015')">
+                                    <td data-label="Project No" class="project-no">OP-2025-015</td>
+                                    <td data-label="Project Name" class="project-name" title="Offshore Platform Maintenance">Offshore Maint</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">3.2M</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">2.8M</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">0</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">2.7M</td>
+                                    <td data-label="%Actual" class="percent-cell">96%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">2.7M</td>
+                                    <td data-label="Available" class="amount positive" style="text-align: right;">100K</td>
+                                    <td data-label="%Available" class="percent-cell">4%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">0</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">2.7M</td>
+                                    <td data-label="%EAC" class="percent-cell">96%</td>
+                                    <td data-label="VAC" class="amount positive" style="text-align: right;">-100K</td>
+                                    <td data-label="Physical %" class="percent-cell">100%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-good">1.04</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-green">
+                                            <span class="health-icon">✓</span>
+                                            <span>Safe</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Project 6 -->
+                                <tr data-health="green" data-project-code="VI-2026-004" onclick="openProjectDetail('Vessel Inspection Program', 'VI-2026-004')">
+                                    <td data-label="Project No" class="project-no">VI-2026-004</td>
+                                    <td data-label="Project Name" class="project-name" title="Vessel Inspection Program">Vessel Inspect</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">1.8M</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">1.5M</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">200K</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">900K</td>
+                                    <td data-label="%Actual" class="percent-cell">60%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">1.1M</td>
+                                    <td data-label="Available" class="amount" style="text-align: right;">400K</td>
+                                    <td data-label="%Available" class="percent-cell">27%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">600K</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">1.5M</td>
+                                    <td data-label="%EAC" class="percent-cell">100%</td>
+                                    <td data-label="VAC" class="amount" style="text-align: right;">0</td>
+                                    <td data-label="Physical %" class="percent-cell">65%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-good">1.08</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-green">
+                                            <span class="health-icon">✓</span>
+                                            <span>Safe</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Project 7 -->
+                                <tr data-health="yellow" data-project-code="ROV-2026-005" onclick="openProjectDetail('ROV Services Contract', 'ROV-2026-005')">
+                                    <td data-label="Project No" class="project-no">ROV-2026-005</td>
+                                    <td data-label="Project Name" class="project-name" title="ROV Services Contract">ROV Services</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">4.2M</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">3.5M</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">500K</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">2.9M</td>
+                                    <td data-label="%Actual" class="percent-cell">83%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">3.4M</td>
+                                    <td data-label="Available" class="amount" style="text-align: right;">100K</td>
+                                    <td data-label="%Available" class="percent-cell">3%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">600K</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">3.5M</td>
+                                    <td data-label="%EAC" class="percent-cell">100%</td>
+                                    <td data-label="VAC" class="amount" style="text-align: right;">0</td>
+                                    <td data-label="Physical %" class="percent-cell">85%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-warning">0.97</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-yellow">
+                                            <span class="health-icon">⚠</span>
+                                            <span>Watch</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Project 8 -->
+                                <tr data-health="green" data-project-code="DSS-2026-006" onclick="openProjectDetail('Diving Support Services', 'DSS-2026-006')">
+                                    <td data-label="Project No" class="project-no">DSS-2026-006</td>
+                                    <td data-label="Project Name" class="project-name" title="Diving Support Services">Diving Support</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">2.5M</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">2.1M</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">300K</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">1.2M</td>
+                                    <td data-label="%Actual" class="percent-cell">57%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">1.5M</td>
+                                    <td data-label="Available" class="amount" style="text-align: right;">600K</td>
+                                    <td data-label="%Available" class="percent-cell">29%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">900K</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">2.1M</td>
+                                    <td data-label="%EAC" class="percent-cell">100%</td>
+                                    <td data-label="VAC" class="amount" style="text-align: right;">0</td>
+                                    <td data-label="Physical %" class="percent-cell">60%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-good">1.05</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-green">
+                                            <span class="health-icon">✓</span>
+                                            <span>Safe</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Project 9 -->
+                                <tr data-health="yellow" data-project-code="MC-2026-007" onclick="openProjectDetail('Marine Construction', 'MC-2026-007')">
+                                    <td data-label="Project No" class="project-no">MC-2026-007</td>
+                                    <td data-label="Project Name" class="project-name" title="Marine Construction Project">Marine Constr</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">5.5M</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">4.8M</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">600K</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">4.1M</td>
+                                    <td data-label="%Actual" class="percent-cell">85%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">4.7M</td>
+                                    <td data-label="Available" class="amount" style="text-align: right;">100K</td>
+                                    <td data-label="%Available" class="percent-cell">2%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">700K</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">4.8M</td>
+                                    <td data-label="%EAC" class="percent-cell">100%</td>
+                                    <td data-label="VAC" class="amount" style="text-align: right;">0</td>
+                                    <td data-label="Physical %" class="percent-cell">88%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-warning">0.96</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-yellow">
+                                            <span class="health-icon">⚠</span>
+                                            <span>Watch</span>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <!-- Project 10 -->
+                                <tr data-health="green" data-project-code="CTS-2026-008" onclick="openProjectDetail('Crew Transfer Services', 'CTS-2026-008')">
+                                    <td data-label="Project No" class="project-no">CTS-2026-008</td>
+                                    <td data-label="Project Name" class="project-name" title="Crew Transfer Services">Crew Transfer</td>
+                                    <td data-label="Revenue" class="amount" style="text-align: right;">1.2M</td>
+                                    <td data-label="Budget At Completion" class="amount" style="text-align: right;">1.0M</td>
+                                    <td data-label="Commit" class="amount" style="text-align: right;">150K</td>
+                                    <td data-label="Actual" class="amount" style="text-align: right;">600K</td>
+                                    <td data-label="%Actual" class="percent-cell">60%</td>
+                                    <td data-label="Commit+Actual" class="amount" style="text-align: right; font-weight: 700;">750K</td>
+                                    <td data-label="Available" class="amount" style="text-align: right;">250K</td>
+                                    <td data-label="%Available" class="percent-cell">25%</td>
+                                    <td data-label="ETC" class="amount" style="text-align: right;">400K</td>
+                                    <td data-label="EAC" class="amount" style="text-align: right;">1.0M</td>
+                                    <td data-label="%EAC" class="percent-cell">100%</td>
+                                    <td data-label="VAC" class="amount" style="text-align: right;">0</td>
+                                    <td data-label="Physical %" class="percent-cell">65%</td>
+                                    <td data-label="CPI" class="cpi-cell cpi-good">1.08</td>
+                                    <td data-label="Health" style="text-align: center;">
+                                        <span class="health-status health-green">
+                                            <span class="health-icon">✓</span>
+                                            <span>Safe</span>
+                                        </span>
+                                    </td>
+                                </tr>
                             </tbody>
                             <!-- SUMMARY ROW -->
                             <tfoot>
@@ -2269,64 +2364,53 @@
             </div>
             <div class="modal-body">
                 <div class="menu-grid">
-                    <!-- ROW 1: 5 Menus with URLs -->
-                    <!-- Menu 1: Plan Revenue/Cost -->
+                    <!-- Row 1: Menu 1-5 (with URLs) -->
                     <div class="menu-card" onclick="openMenu('planRevenueCost')">
                         <span class="menu-card-icon">💰</span>
                         <div class="menu-card-title">Plan Revenue/Cost</div>
                         <div class="menu-card-subtitle">View budget & revenue planning</div>
                     </div>
-                    <!-- Menu 2: Cost Report -->
                     <div class="menu-card" onclick="openMenu('costReport')">
                         <span class="menu-card-icon">📊</span>
                         <div class="menu-card-title">Cost Report</div>
                         <div class="menu-card-subtitle">Detailed cost analysis</div>
                     </div>
-                    <!-- Menu 3: Revenue -->
                     <div class="menu-card" onclick="openMenu('revenue')">
                         <span class="menu-card-icon">💵</span>
                         <div class="menu-card-title">Revenue</div>
                         <div class="menu-card-subtitle">Revenue tracking & invoicing</div>
                     </div>
-                    <!-- Menu 4: Expenses -->
                     <div class="menu-card" onclick="openMenu('expenses')">
                         <span class="menu-card-icon">💳</span>
                         <div class="menu-card-title">Expenses</div>
                         <div class="menu-card-subtitle">Expense transactions</div>
                     </div>
-                    <!-- Menu 5: Spending & Forecast -->
                     <div class="menu-card" onclick="openMenu('spendingForecast')">
                         <span class="menu-card-icon">📈</span>
                         <div class="menu-card-title">Spending & Forecast</div>
                         <div class="menu-card-subtitle">S-Curve & projections</div>
                     </div>
-                    
-                    <!-- ROW 2: 5 Additional Menus -->
-                    <!-- Menu 6: Transactions -->
+                    <!-- Row 2: Menu 6-10 -->
                     <div class="menu-card" onclick="openMenu('transactions')">
                         <span class="menu-card-icon">📝</span>
                         <div class="menu-card-title">Transactions</div>
                         <div class="menu-card-subtitle">All transaction history</div>
                     </div>
-                    <!-- Menu 7: GL Expense -->
                     <div class="menu-card" onclick="openMenu('glExpense')">
                         <span class="menu-card-icon">📚</span>
                         <div class="menu-card-title">GL Expense</div>
                         <div class="menu-card-subtitle">General ledger accounts</div>
                     </div>
-                    <!-- Menu 8: Commitments -->
                     <div class="menu-card" onclick="openMenu('commitments')">
                         <span class="menu-card-icon">🤝</span>
                         <div class="menu-card-title">Commitments</div>
                         <div class="menu-card-subtitle">Purchase orders & POs</div>
                     </div>
-                    <!-- Menu 9: Change Management -->
                     <div class="menu-card" onclick="openMenu('changeManagement')">
                         <span class="menu-card-icon">🔄</span>
                         <div class="menu-card-title">Change Management</div>
                         <div class="menu-card-subtitle">Change orders & variations</div>
                     </div>
-                    <!-- Menu 10: Project Reports -->
                     <div class="menu-card" onclick="openMenu('projectReports')">
                         <span class="menu-card-icon">📑</span>
                         <div class="menu-card-title">Project Reports</div>
@@ -2341,8 +2425,7 @@
     <script>
         // Store current project code globally
         let currentProjectCode = '';
-        
-        // Menu URL mappings
+        // Menu URL mappings - UPDATED with all 8 URLs
         const menuURLs = {
             'planRevenueCost': 'https://pcs-jl.github.io/Plan/',
             'costReport': 'https://pcs-jl.github.io/Cost/',
@@ -2353,7 +2436,6 @@
             'glExpense': 'https://pcs-jl.github.io/GL-Expense/',
             'commitments': 'https://pcs-jl.github.io/Commitments/'
         };
-        
         // Page Navigation System
         function showPage(pageId) {
             document.querySelectorAll('.page-container').forEach(page => {
@@ -2363,7 +2445,6 @@
             window.scrollTo(0, 0);
             console.log('Navigated to:', pageId);
         }
-        
         // Login Handler
         function handleLogin(event) {
             event.preventDefault();
@@ -2379,72 +2460,30 @@
                 showPage('moduleSelectionPage');
             }, 1500);
         }
-        
-        // ✅ NEW: Module Access - Updated to handle CFO portal
+        // Module Access - UPDATED to handle CFO module with image URL
         function accessModule(module) {
-            if (module === 'pm') {
+            if (module === 'cfo') {
+                // Open CFO Portal image in new window
+                window.open('https://raw.githubusercontent.com/PCS-JL/Ent/main/Enterprise.png', '_blank');
+            } else if (module === 'pm') {
                 showPage('projectCostPage');
-            } else if (module === 'cfo') {
-                showPage('cfoPortalPage');
-                loadCFODashboard();
             } else {
                 alert('Opening ' + module.toUpperCase() + ' Portal...\n\n(Module functionality will be implemented here)');
             }
         }
-        
-        // ✅ NEW: Load CFO Dashboard Image
-        function loadCFODashboard() {
-            const container = document.getElementById('dashboardImageContainer');
-            const imageUrl = 'https://raw.githubusercontent.com/PCS-JL/Ent/main/Enterprise.png';
-            
-            // Simulate loading delay
-            setTimeout(() => {
-                container.innerHTML = `
-                    <img src="${imageUrl}" 
-                         alt="Enterprise Dashboard" 
-                         class="cfo-dashboard-image"
-                         onerror="handleImageError(this)"
-                         onload="handleImageLoad()">
-                `;
-            }, 800);
-        }
-        
-        // ✅ NEW: Handle image load success
-        function handleImageLoad() {
-            console.log('✅ CFO Dashboard image loaded successfully');
-        }
-        
-        // ✅ NEW: Handle image load error
-        function handleImageError(img) {
-            console.error('❌ Failed to load CFO Dashboard image');
-            img.parentElement.innerHTML = `
-                <div style="text-align: center; padding: 60px 20px;">
-                    <div style="font-size: 4rem; margin-bottom: 20px;">⚠️</div>
-                    <h2 style="color: #ef4444; margin-bottom: 10px;">Failed to Load Dashboard</h2>
-                    <p style="color: #6b7280;">The enterprise dashboard image could not be loaded. Please check your connection and try again.</p>
-                    <button class="btn btn-primary" style="margin-top: 20px;" onclick="loadCFODashboard()">
-                        Retry
-                    </button>
-                </div>
-            `;
-        }
-        
-        // Go Back to Module Selection
+        // Go Back to Module Selection from Project Cost Page
         function goBackToModules() {
             showPage('moduleSelectionPage');
         }
-        
         // Toggle Password
         function togglePassword(inputId) {
             const input = document.getElementById(inputId);
             input.type = input.type === 'password' ? 'text' : 'password';
         }
-        
         // Request Demo
         function requestDemo() {
             alert('Thank you for your interest!\n\nOur team will contact you within 24 hours to schedule a personalized demo.');
         }
-        
         // Refresh Data
         function refreshData() {
             const btn = event.target.closest('button');
@@ -2454,17 +2493,9 @@
             setTimeout(() => {
                 btn.innerHTML = originalHTML;
                 btn.disabled = false;
-                
-                // Reload CFO dashboard if on CFO page
-                const cfoPage = document.getElementById('cfoPortalPage');
-                if (cfoPage.classList.contains('active')) {
-                    loadCFODashboard();
-                }
-                
                 alert('Data refreshed successfully!');
             }, 1500);
         }
-        
         // Filter Projects
         function filterProjects(searchTerm) {
             const rows = document.querySelectorAll('#projectsTable tbody tr');
@@ -2474,7 +2505,6 @@
                 row.style.display = text.includes(searchTerm) ? '' : 'none';
             });
         }
-        
         // Filter By Status
         function filterByStatus(health) {
             const rows = document.querySelectorAll('#projectsTable tbody tr');
@@ -2486,7 +2516,6 @@
                 }
             });
         }
-        
         // Open Project Detail Modal
         function openProjectDetail(projectName, projectCode) {
             currentProjectCode = projectCode;
@@ -2494,38 +2523,36 @@
             document.getElementById('projectModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
-        
         // Close Project Detail Modal
         function closeProjectDetail() {
             document.getElementById('projectModal').classList.remove('active');
             document.body.style.overflow = 'auto';
             currentProjectCode = '';
         }
-        
-        // Open Menu
+        // Open Menu - Opens external URLs in new window
         function openMenu(menuType) {
+            // Check if this menu has a URL mapping
             if (menuURLs[menuType]) {
+                // Open in new window
                 window.open(menuURLs[menuType], '_blank');
                 console.log('Opening ' + menuType + ' for project: ' + currentProjectCode + ' at ' + menuURLs[menuType]);
             } else {
-                alert('Opening ' + menuType + ' for project: ' + currentProjectCode + '\n\nThis module will be available soon.');
+                // For menus without URL mapping, show alert
+                alert('Opening ' + menuType + ' for project: ' + currentProjectCode + '\n\nThis would open a new page/view with detailed ' + menuType + ' information.');
             }
         }
-        
         // Close modal on outside click
         document.getElementById('projectModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeProjectDetail();
             }
         });
-        
         // Close modal on ESC key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeProjectDetail();
             }
         });
-        
         // Scroll Functions
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
@@ -2541,14 +2568,12 @@
                 scrollTop.classList.remove('show');
             }
         });
-        
         function scrollToTop() {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
         }
-        
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -2565,7 +2590,6 @@
                 }
             });
         });
-        
         // Debounced resize handler
         let resizeTimer;
         window.addEventListener('resize', function() {
