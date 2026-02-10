@@ -2364,36 +2364,39 @@
             </div>
             <div class="modal-body">
                 <div class="menu-grid">
+                    <!-- ROW 1: 5 Menus with URLs -->
                     <!-- Menu 1: Plan Revenue/Cost -->
-                    <div class="menu-card" onclick="openMenuURL('https://pcs-jl.github.io/Plan/')">
+                    <div class="menu-card" onclick="openMenu('planRevenueCost')">
                         <span class="menu-card-icon">💰</span>
                         <div class="menu-card-title">Plan Revenue/Cost</div>
                         <div class="menu-card-subtitle">View budget & revenue planning</div>
                     </div>
                     <!-- Menu 2: Cost Report -->
-                    <div class="menu-card" onclick="openMenuURL('https://pcs-jl.github.io/Cost/')">
+                    <div class="menu-card" onclick="openMenu('costReport')">
                         <span class="menu-card-icon">📊</span>
                         <div class="menu-card-title">Cost Report</div>
                         <div class="menu-card-subtitle">Detailed cost analysis</div>
                     </div>
                     <!-- Menu 3: Revenue -->
-                    <div class="menu-card" onclick="openMenuURL('https://pcs-jl.github.io/Revenue/')">
+                    <div class="menu-card" onclick="openMenu('revenue')">
                         <span class="menu-card-icon">💵</span>
                         <div class="menu-card-title">Revenue</div>
                         <div class="menu-card-subtitle">Revenue tracking & invoicing</div>
                     </div>
                     <!-- Menu 4: Expenses -->
-                    <div class="menu-card" onclick="openMenuURL('https://pcs-jl.github.io/Expenses/')">
+                    <div class="menu-card" onclick="openMenu('expenses')">
                         <span class="menu-card-icon">💳</span>
                         <div class="menu-card-title">Expenses</div>
                         <div class="menu-card-subtitle">Expense transactions</div>
                     </div>
                     <!-- Menu 5: Spending & Forecast -->
-                    <div class="menu-card" onclick="openMenuURL('https://pcs-jl.github.io/Spending/')">
+                    <div class="menu-card" onclick="openMenu('spendingForecast')">
                         <span class="menu-card-icon">📈</span>
                         <div class="menu-card-title">Spending & Forecast</div>
                         <div class="menu-card-subtitle">S-Curve & projections</div>
                     </div>
+                    
+                    <!-- ROW 2: 5 Additional Menus -->
                     <!-- Menu 6: Transactions -->
                     <div class="menu-card" onclick="openMenu('transactions')">
                         <span class="menu-card-icon">📝</span>
@@ -2434,6 +2437,18 @@
         // Store current project code globally
         let currentProjectCode = '';
         
+        // ✅ UPDATED: Menu URL mappings with all 8 linked menus
+        const menuURLs = {
+            'planRevenueCost': 'https://pcs-jl.github.io/Plan/',
+            'costReport': 'https://pcs-jl.github.io/Cost/',
+            'revenue': 'https://pcs-jl.github.io/Revenue/',
+            'expenses': 'https://pcs-jl.github.io/Expenses/',
+            'spendingForecast': 'https://pcs-jl.github.io/Spending/',
+            'transactions': 'https://pcs-jl.github.io/Transactions/',
+            'glExpense': 'https://pcs-jl.github.io/GL-Expense/',
+            'commitments': 'https://pcs-jl.github.io/Commitments/'
+        };
+        
         // Page Navigation System
         function showPage(pageId) {
             document.querySelectorAll('.page-container').forEach(page => {
@@ -2443,7 +2458,6 @@
             window.scrollTo(0, 0);
             console.log('Navigated to:', pageId);
         }
-        
         // Login Handler
         function handleLogin(event) {
             event.preventDefault();
@@ -2459,32 +2473,27 @@
                 showPage('moduleSelectionPage');
             }, 1500);
         }
-        
         // Module Access - Modified to redirect PM Portal to Project Cost Page
         function accessModule(module) {
             if (module === 'pm') {
                 showPage('projectCostPage');
             } else {
-                alert(`Opening ${module.toUpperCase()} Portal...\n\n(Module functionality will be implemented here)`);
+                alert('Opening ' + module.toUpperCase() + ' Portal...\n\n(Module functionality will be implemented here)');
             }
         }
-        
         // Go Back to Module Selection from Project Cost Page
         function goBackToModules() {
             showPage('moduleSelectionPage');
         }
-        
         // Toggle Password
         function togglePassword(inputId) {
             const input = document.getElementById(inputId);
             input.type = input.type === 'password' ? 'text' : 'password';
         }
-        
         // Request Demo
         function requestDemo() {
             alert('Thank you for your interest!\n\nOur team will contact you within 24 hours to schedule a personalized demo.');
         }
-        
         // Refresh Data
         function refreshData() {
             const btn = event.target.closest('button');
@@ -2497,7 +2506,6 @@
                 alert('Data refreshed successfully!');
             }, 1500);
         }
-        
         // Filter Projects
         function filterProjects(searchTerm) {
             const rows = document.querySelectorAll('#projectsTable tbody tr');
@@ -2507,7 +2515,6 @@
                 row.style.display = text.includes(searchTerm) ? '' : 'none';
             });
         }
-        
         // Filter By Status
         function filterByStatus(health) {
             const rows = document.querySelectorAll('#projectsTable tbody tr');
@@ -2519,7 +2526,6 @@
                 }
             });
         }
-        
         // Open Project Detail Modal
         function openProjectDetail(projectName, projectCode) {
             currentProjectCode = projectCode;
@@ -2527,7 +2533,6 @@
             document.getElementById('projectModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
-        
         // Close Project Detail Modal
         function closeProjectDetail() {
             document.getElementById('projectModal').classList.remove('active');
@@ -2535,15 +2540,17 @@
             currentProjectCode = '';
         }
         
-        // Open Menu URL - Direct link to external URL
-        function openMenuURL(url) {
-            window.open(url, '_blank');
-            console.log(`Opening URL for project ${currentProjectCode}: ${url}`);
-        }
-        
-        // Open Menu - For menus without URL
+        // ✅ UPDATED: Open Menu - Now handles 8 linked menus and 2 unlinked
         function openMenu(menuType) {
-            alert(`Opening ${menuType} for project: ${currentProjectCode}\n\nThis would open a new page/view with detailed ${menuType} information.`);
+            // Check if this menu has a URL mapping
+            if (menuURLs[menuType]) {
+                // Open in new window
+                window.open(menuURLs[menuType], '_blank');
+                console.log('Opening ' + menuType + ' for project: ' + currentProjectCode + ' at ' + menuURLs[menuType]);
+            } else {
+                // For menus without URL mapping (Change Management & Project Reports)
+                alert('Opening ' + menuType + ' for project: ' + currentProjectCode + '\n\nThis module will be available soon.');
+            }
         }
         
         // Close modal on outside click
@@ -2552,14 +2559,12 @@
                 closeProjectDetail();
             }
         });
-        
         // Close modal on ESC key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeProjectDetail();
             }
         });
-        
         // Scroll Functions
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
@@ -2575,14 +2580,12 @@
                 scrollTop.classList.remove('show');
             }
         });
-        
         function scrollToTop() {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
         }
-        
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -2599,7 +2602,6 @@
                 }
             });
         });
-        
         // Debounced resize handler
         let resizeTimer;
         window.addEventListener('resize', function() {
